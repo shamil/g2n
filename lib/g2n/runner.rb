@@ -1,4 +1,6 @@
 require_relative 'config'
+require_relative 'ganglia_hosts'
+
 
 module G2n
   class Runner
