@@ -1,0 +1,10 @@
+#
+# g2n.yml - main configuration file
+#
+
+# ganglia connection info
+ganglia_host: localhost
+ganglia_port: 8651 # gmetad
+
+# were generated nagios config are saved
+output_path: /tmp/g2n

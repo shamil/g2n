@@ -1,0 +1,25 @@
+#
+# mappings.yml - mappings to nagios configuration
+#
+
+# default mapping, applies to unknown clusters
+default:
+  host_template:
+    - generic_host
+  service_template:
+    - generic_service
+
+# example: web cluster mappings (prod. and staging)
+web.prod:
+  host_template:
+    - generic_host
+  service_template:
+    - generic_service
+    - web_server
+
+web.staging:
+  host_template:
+    - generic_host
+  service_template:
+    - generic_service
+    - web_server
