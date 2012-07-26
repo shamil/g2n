@@ -3,7 +3,7 @@
 #
 
 # ganglia connection info
-ganglia_host: localhost
+ganglia_host: file:///tmp/ganglia.xml
 ganglia_port: 8651 # gmetad
 
 # were generated nagios config are saved

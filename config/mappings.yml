@@ -12,6 +12,6 @@ web.prod:
   desc: Production web server
   template: web
 
-db.mongo:
-  desc: Staging web server
+db.mongo.prod:
+  desc: Production mongodb server
   template: mongodb
