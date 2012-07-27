@@ -1,6 +1,6 @@
-require_relative 'config'
-require_relative 'renderer'
-require_relative 'ganglia_hosts'
+require 'g2n/config'
+require 'g2n/renderer'
+require 'g2n/ganglia_hosts'
 
 module G2n
   class Runner

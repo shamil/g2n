@@ -1,6 +1,6 @@
-require 'erb'
+require 'g2n/config'
 require 'fileutils'
-require_relative 'config'
+require 'erb'
 
 module G2n
   class Renderer

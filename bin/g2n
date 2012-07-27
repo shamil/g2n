@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/g2n/runner'
+require 'g2n/runner'
 runner = G2n::Runner.new(ARGV)
 runner.run
