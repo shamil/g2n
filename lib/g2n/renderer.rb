@@ -1,14 +1,11 @@
-require 'g2n/config'
 require 'fileutils'
 require 'erb'
 
 module G2n
   class Renderer
-    # constants
-    TEMPLATES_PATH = 'templates'
 
     # class variables (also called static attributes)
-    @@mappings = Config.new('config/mappings.yml')
+    @@mappings = Config.new("#{CONFIG_DIR}/mappings.yml")
 
     # constructor
     def initialize(ganglia_host)
@@ -34,7 +31,7 @@ module G2n
     protected
 
     def render
-      template_file = TEMPLATES_PATH + "/" + @@mappings[@cluster].template + ".erb"
+      template_file = TEMPLATES_DIR + "/" + @@mappings[@cluster].template + ".erb"
 
       begin
         erb = ERB.new(File.read(template_file))

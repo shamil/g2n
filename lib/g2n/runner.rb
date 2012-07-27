@@ -1,11 +1,12 @@
-require 'g2n/config'
-require 'g2n/renderer'
-require 'g2n/ganglia_hosts'
+#
+# The runner module, used by executable
+#
+require 'g2n'
 
 module G2n
   class Runner
     def initialize(argv)
-      @config = Config.new('config/g2n.yml')
+      @config = Config.new("#{CONFIG_DIR}/g2n.yml")
       @hosts  = Ganglia::hosts(@config.ganglia_host, @config.ganglia_port)
     end
 
