@@ -8,17 +8,16 @@ module G2n
     @@mappings = G2n::Config.new("#{CONFIG_DIR}/mappings.yml")
 
     # constructor
-    def initialize(ganglia_host)
-      if ganglia_host.is_a?(Hash)
-        @host = ganglia_host
-      else
-        raise TypeError, "'ganglia_host' is not Hash."
+    def initialize(host)
+      # check that we got a right argument type
+      unless host.is_a?(Struct::GangliaHost)
+        raise ArgumentError, "host must be Struct::GangliaHost (not #{host.class.to_s})."
       end
 
       # set instance variables for the host
-      @cluster  = @@mappings[@host[:cluster]].is_a?(G2n::Config) ? @host[:cluster] : 'default' # assign default mapping if needed
-      @hostname = @host[:hostname]
-      @ipaddr   = @host[:ipaddr]
+      @cluster  = @@mappings[host.cluster].is_a?(G2n::Config) ? host.cluster : 'default' # assign default mapping if needed
+      @hostname = host.hostname
+      @ipaddr   = host.ipaddr
       @desc     = @@mappings[@cluster].desc
     end
 

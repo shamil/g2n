@@ -24,17 +24,15 @@ module G2n
       file.close()
 
       hosts = []
-      doc.elements.each("/GANGLIA_XML/GRID/CLUSTER") { |element|
+      Struct.new("GangliaHost", :cluster, :ipaddr, :hostname)
+
+      doc.elements.each("/GANGLIA_XML/GRID/CLUSTER") do |element|
         cluster = element.attributes["NAME"]
 
-        doc.elements.each("/GANGLIA_XML/GRID/CLUSTER[@NAME='#{cluster}']/HOST") { |host|
-          hosts << {
-            :cluster  => cluster,
-            :ipaddr   => host.attributes['IP'],
-            :hostname => host.attributes['NAME'],
-          }
-        }
-      }
+        doc.elements.each("/GANGLIA_XML/GRID/CLUSTER[@NAME='#{cluster}']/HOST") do |host|
+          hosts << Struct::GangliaHost.new(cluster, host.attributes['IP'], host.attributes['NAME'])
+        end
+      end
 
       return hosts
     end
