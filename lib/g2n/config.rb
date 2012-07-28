@@ -3,7 +3,7 @@ require 'yaml'
 module G2n
 
   #
-  # Yaml configs loader class
+  # Yaml config loader class
   # from: http://mjijackson.com/2010/02/flexible-ruby-config-objects
   #
   class Config

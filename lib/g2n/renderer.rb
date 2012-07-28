@@ -5,7 +5,7 @@ module G2n
   class Renderer
 
     # class variables (also called static attributes)
-    @@mappings = Config.new("#{CONFIG_DIR}/mappings.yml")
+    @@mappings = G2n::Config.new("#{CONFIG_DIR}/mappings.yml")
 
     # constructor
     def initialize(ganglia_host)
@@ -22,9 +22,13 @@ module G2n
       @desc     = @@mappings[@cluster].desc
     end
 
-    def output(path)
+    def to_file(path)
       FileUtils.mkpath(File.dirname(path))
       File.open(path, 'w') {|file| file.write self.render }
+    end
+
+    def to_s
+      return self.render
     end
 
     # hide methd(s) below
