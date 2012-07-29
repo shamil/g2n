@@ -5,6 +5,7 @@ require 'g2n'
 
 module G2n
   class Runner
+
     def initialize(argv)
       @config = G2n::Config.new("#{CONFIG_DIR}/g2n.yml")
       @hosts  = G2n::Ganglia::hosts(@config.ganglia_host, @config.ganglia_port)

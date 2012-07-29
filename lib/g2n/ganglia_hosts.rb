@@ -4,6 +4,7 @@ require "rexml/document"
 
 module G2n
   module Ganglia
+
     def self.hosts(host, port)
       # open file directly if starts with file://
       if host.downcase.start_with?('file://')

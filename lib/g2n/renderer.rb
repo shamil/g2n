@@ -30,7 +30,7 @@ module G2n
       return self.render
     end
 
-    # hide methd(s) below
+    # hide method(s) below
     protected
 
     def render
@@ -42,7 +42,8 @@ module G2n
         if @cluster == "default"
           Kernel.abort "Aborting, no default template was found."
         else
-          $stderr.puts "Skipping, no #{@cluster} template was found."
+          $stderr.puts "Skipping '#{@cluster}', no template was found."
+          return
         end
       end
 

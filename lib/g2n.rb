@@ -1,9 +1,12 @@
 
-#
-# constants
-#
-CONFIG_DIR = 'config' # '/etc/g2n'
-TEMPLATES_DIR = "#{CONFIG_DIR}/templates"
+
+module G2n
+  #
+  # constants
+  #
+  CONFIG_DIR = 'config' # '/etc/g2n'
+  TEMPLATES_DIR = "#{CONFIG_DIR}/templates"
+end
 
 #
 # g2n requires
