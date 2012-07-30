@@ -7,4 +7,5 @@ ganglia_host: file:///tmp/ganglia.xml
 ganglia_port: 8651 # gmetad
 
 # were generated nagios config are saved
+# non full paths are relatve to <G2n::GLOBALS.conf_dir> directory
 output_path: /tmp/g2n

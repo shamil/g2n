@@ -5,7 +5,7 @@ module G2n
   class Renderer
 
     # class variables (also called static attributes)
-    @@mappings = G2n::Config.new("#{CONFIG_DIR}/mappings.yml")
+    @@mappings = G2n::Config.new(G2n::GLOBALS.conf_dir + '/mappings.yml')
 
     # constructor
     def initialize(host)
@@ -34,15 +34,15 @@ module G2n
     protected
 
     def render
-      template_file = TEMPLATES_DIR + "/" + @@mappings[@cluster].template + ".erb"
+      template_file = G2n::GLOBALS.tmpl_dir + "/" + @@mappings[@cluster].template + ".erb"
 
       begin
         erb = ERB.new(File.read(template_file))
       rescue Errno::ENOENT
         if @cluster == "default"
-          Kernel.abort "Aborting, no default template was found."
+          abort "Aborting, no default template was found."
         else
-          $stderr.puts "Skipping '#{@cluster}', no template was found."
+          STDERR.puts "Skipping '#{@cluster}', no template was found."
           return
         end
       end
