@@ -38,6 +38,7 @@ define service {
     use                     nrpe_check_mongodb_connections
 }
 
+<% unless @hostname.include? "db-arbiter" %>
 # mongodb_replication
 define service {
     host_name               <%= @hostname %>
@@ -51,3 +52,4 @@ define service {
     service_description     mongodb_replset_state
     use                     nrpe_check_mongodb_replset_state
 }
+<% end %>
