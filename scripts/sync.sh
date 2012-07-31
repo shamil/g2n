@@ -37,11 +37,11 @@ G2N_OUTPUT_DIR=${G2N_OUTPUT_DIR%/}
 NAGIOS_CFG_DIR=${NAGIOS_CFG_DIR%/}
 
 # run g2n
-echo "Running g2n"
+echo "Running g2n..."
 ruby -Ilib bin/g2n
 
 [ -z "$(rsync --dry-run --delete-after --itemize-changes --checksum -r $G2N_OUTPUT_DIR/* $NAGIOS_CFG_DIR/)" ]  && {
-  echo "No changes was founds, exiting..."
+  echo "No changes were found, exiting..."
   exit
 }
 
