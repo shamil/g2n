@@ -27,17 +27,15 @@ module G2n
           G2n::GLOBALS.tmpl_dir = tmpl
         end
 
+        # handle template path
+        opts.on('-L', '--list', "list all hosts from the gmetad host") do
+          self.list_hosts
+          exit
+        end
+
         # print config options in parsable format 'key:value'
         opts.on('--conf <key[,key...]>', 'print config options by key') do |keys|
-          self.load_config
-
-          keys.split(',').each do |key|
-            unless G2n::GLOBALS.config[key] == nil
-              puts "#{key}:" + G2n::GLOBALS.config[key].to_s
-            else
-              STDERR.puts "ERR: no such config option (#{key})"
-            end
-          end
+          self.get_conf(keys)
           exit
         end
 
@@ -57,8 +55,25 @@ module G2n
       end
     end
 
-    def load_config
-      G2n::GLOBALS.config = G2n::Config.new(G2n::GLOBALS.conf_dir + '/g2n.yml')
+    def list_hosts
+      self.load_config
+
+      hosts = G2n::Ganglia::hosts(G2n::GLOBALS.config.ganglia_host, G2n::GLOBALS.config.ganglia_port)
+      hosts.each do |host|
+        printf("%s: %s (%s)\n", host.cluster, host.hostname, host.ipaddr)
+      end
+    end
+
+    def get_conf(keys)
+      self.load_config
+
+      keys.split(',').each do |key|
+        unless G2n::GLOBALS.config[key] == nil
+          puts "#{key}:" + G2n::GLOBALS.config[key].to_s
+        else
+          STDERR.puts "ERR: no such config option (#{key})"
+        end
+      end
     end
 
     def run
@@ -72,6 +87,13 @@ module G2n
         nconf = G2n::Renderer.new(host)
         nconf.to_file(G2n::GLOBALS.config.output_path + "/" + host[:hostname] + '.cfg')
       end
+    end
+
+    # hide method(s) below
+    protected
+
+    def load_config
+      G2n::GLOBALS.config = G2n::Config.new(G2n::GLOBALS.conf_dir + '/g2n.yml')
     end
   end
 end
