@@ -79,14 +79,24 @@ module G2n
     def run
       self.load_config
 
-      # load hosts from gangla
+      # save list of generated nagios config files before and after
+      old_config_files = Dir.glob(G2n::GLOBALS.config.output_path + '/*.cfg')
+      new_config_files = []
+
+      # load hosts from ganglia
       hosts = G2n::Ganglia::hosts(G2n::GLOBALS.config.ganglia_host, G2n::GLOBALS.config.ganglia_port)
 
       # render nagios config per host
       hosts.each do |host|
+        filename = G2n::GLOBALS.config.output_path + "/" + host[:hostname] + '.cfg'
+
         nconf = G2n::Renderer.new(host)
-        nconf.to_file(G2n::GLOBALS.config.output_path + "/" + host[:hostname] + '.cfg')
+        nconf.to_file(filename)
+        new_config_files << filename # save list of newely generated config files
       end
+
+      # remove stale configs
+      (old_config_files - new_config_files).each { |filename| File.unlink(filename) }
     end
 
     # hide method(s) below
