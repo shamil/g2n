@@ -23,7 +23,7 @@ module G2n
 
     def to_file(path)
       FileUtils.mkpath(File.dirname(path))
-      File.open(path, 'w') {|file| file.write self.render }
+      File.write(path, self.render)
     end
 
     def to_s
