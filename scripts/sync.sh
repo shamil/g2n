@@ -40,7 +40,7 @@ NAGIOS_CFG_DIR=${NAGIOS_CFG_DIR%/}
 echo "Running g2n..."
 ruby -Ilib bin/g2n
 
-[ -z "$(rsync --dry-run --delete-after --itemize-changes --checksum -r $G2N_OUTPUT_DIR/* $NAGIOS_CFG_DIR/)" ]  && {
+[ -z "$(rsync --dry-run --del --itemize-changes --checksum -r $G2N_OUTPUT_DIR/ $NAGIOS_CFG_DIR/)" ]  && {
   echo "No changes were found, exiting..."
   exit
 }
@@ -52,5 +52,5 @@ ruby -Ilib bin/g2n
 }
 
 echo "Changes to configs were found, copying & restarting"
-rsync --delete-after -qcr $G2N_OUTPUT_DIR/* $NAGIOS_CFG_DIR/
+rsync --del -qcr $G2N_OUTPUT_DIR/ $NAGIOS_CFG_DIR/
 service nagios3 restart
