@@ -58,9 +58,10 @@ module G2n
     def list_hosts
       self.load_config
 
+      puts
       hosts = G2n::Ganglia::hosts(G2n::GLOBALS.config.ganglia_host, G2n::GLOBALS.config.ganglia_port)
       hosts.each do |host|
-        printf("%s: %s (%s)\n", host.cluster, host.hostname, host.ipaddr)
+        printf("%-20s| %-30s| %s\n", host.cluster, host.hostname, host.ipaddr)
       end
     end
 
