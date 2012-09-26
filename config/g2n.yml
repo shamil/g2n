@@ -6,6 +6,8 @@
 ganglia_host: 10.242.246.48
 ganglia_port: 8651 # gmetad
 
+# for how long to keep the host if it passed the ganglia TMAX time
+
 # were generated nagios config are saved
 # non full paths are relatve to <G2n::GLOBALS.conf_dir> directory
 output_path: /var/tmp/g2n
