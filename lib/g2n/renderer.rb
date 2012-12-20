@@ -21,20 +21,41 @@ module G2n
       @desc     = @@mappings[@cluster].desc
     end
 
-    def to_file(path)
-      FileUtils.mkpath(File.dirname(path))
-      File.open(path, 'w') {|file| file.write self.render }
+    def to_s
+      return self.render unless self.check_bypass
     end
 
-    def to_s
-      return self.render
+    def to_file(path)
+      FileUtils.mkpath(File.dirname(path))
+      File.open(path, 'w') {|file| file.write self.to_s }
     end
 
     # hide method(s) below
     protected
 
+    def check_bypass
+      filters = @@mappings[@cluster].bypass
+
+      # only string and array are allowed
+      unless (filters.is_a?(String) || filters.is_a?(Array))
+          STDERR.puts "Skipping bypass filter for '#{@cluster}', the filter is in wrong format." unless filters.nil?
+          return false
+      end
+
+      # if it's string, then make it an array
+      filters = [filters] unless filters.is_a?(Array)
+      filters.each do |bypass|
+        if (File.fnmatch(bypass, @hostname) || File.fnmatch(bypass, @ipaddr))
+          STDERR.puts "Skipping config for '#{@hostname} (#{@ipaddr})', bypass filter matched (#{filters.join(',')})."
+          return true
+        end
+      end
+      return false
+    end
+
     def render
-      template_file = G2n::GLOBALS.tmpl_dir + "/" + @@mappings[@cluster].template + ".erb"
+      template = @@mappings[@cluster].template || @cluster
+      template_file = G2n::GLOBALS.tmpl_dir + "/" + template + ".erb"
 
       begin
         erb = ERB.new(File.read(template_file))

@@ -6,6 +6,7 @@
 default:
   desc: Generic linux server
   template: default
+  bypass: ['localhost', '127.*']
 
 cloud.worker.prod:
   desc: Worker
