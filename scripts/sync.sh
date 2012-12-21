@@ -51,6 +51,6 @@ ruby -Ilib bin/g2n
   exit 1
 }
 
-echo "Changes to configs were found, copying & restarting"
+echo "Changes to configs were found, copying & restarting nagios"
 rsync --del -qcr $G2N_OUTPUT_DIR/ $NAGIOS_CFG_DIR/
-service nagios3 restart
+/etc/init.d/nagios3 restart >/dev/null || echo "Nagios restart failed, run restart command manually to see the errors"
