@@ -18,7 +18,7 @@ This script will get all hosts from Ganglia (gmetad) and convert to Nagios confi
 * After copying it will restart Nagios daemon, in order for the changes to take effect.
 * The script will check for changes before copying the generated configs to Nagios configuration directory and before restarting Nagios daemon. So when no changes found, the sync script won't do any restarts to Nagios daemon.
 
-> _FYI: edit the sync script and change the `NAGIOS_CFG_DIR` variable to desired Nagios configuration directory_
+> FYI: edit the sync script and change the `NAGIOS_CFG_DIR` variable to desired Nagios configuration directory
 
 **while developing, run the script like this:**
 
@@ -26,3 +26,7 @@ This script will get all hosts from Ganglia (gmetad) and convert to Nagios confi
 cd <project-dir>
 ruby -Ilib bin/g2n
 ```
+
+**license**
+
+[DO WHATEVER THE FUCK YOU WANT, PUBLIC LICENSE](http://wtfpl.org)
