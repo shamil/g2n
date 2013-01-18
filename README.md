@@ -27,6 +27,6 @@ cd <project-dir>
 ruby -Ilib bin/g2n
 ```
 
-**license**
+## license
 
-[DO WHATEVER THE FUCK YOU WANT, PUBLIC LICENSE](http://wtfpl.org)
+[wtfpl](http://wtfpl.org)
