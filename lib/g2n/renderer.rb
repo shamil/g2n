@@ -26,8 +26,9 @@ module G2n
     end
 
     def to_file(path)
+      cfg = self.to_s || return
       FileUtils.mkpath(File.dirname(path))
-      File.open(path, 'w') {|file| file.write self.to_s }
+      File.open(path, 'w') {|file| file.write cfg }
     end
 
     # hide method(s) below
