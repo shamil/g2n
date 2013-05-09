@@ -32,7 +32,7 @@ module G2n
 
         doc.elements.each("/GANGLIA_XML/GRID/CLUSTER[@NAME='#{cluster}']/HOST") do |h|
           # skip hosts that are down (TN must be less the TMAX)
-          next if h.attributes['TN'].to_i > (h.attributes['TMAX'].to_i + 10)
+          next if h.attributes['TN'].to_i > (h.attributes['TMAX'].to_i * 4)
           hosts << Struct::GangliaHost.new(cluster, h.attributes['IP'], h.attributes['NAME'])
         end
       end
