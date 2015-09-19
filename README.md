@@ -29,4 +29,4 @@ ruby -Ilib bin/g2n
 
 ## license
 
-[wtfpl](wtfpl.net/txt/copying/)
+[wtfpl](http://www.wtfpl.net/txt/copying/)
